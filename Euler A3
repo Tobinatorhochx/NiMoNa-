@@ -16,3 +16,30 @@ x = Euler(f, x0, t)
 xTr = 0.5*np.exp(-t)
 plt.plot(t, x, 'b-.', xTr, 'r.-')
 plt.show
+
+
+
+
+
+#--------------------------------------------------------------------
+import numpy as np
+import matplotlib.pyplot as plt
+
+def Euler(x0, v0, t):
+    x, v = np.zeros(len(t)), np.zeros(len(t))
+    v[0] = v0
+    x[0] = x0
+    for i in range(0, len(t)-1):
+        v[i+1] = v[i] - x[i] * h
+        
+        x[i+1] = x[i] - x[i] * h**2 + v[i] * h *0.5 
+        
+    return v, x
+h = 0.01
+t = np.linspace(0, 20*np.pi, int(20*np.pi/h))
+v0 = 1
+x0 = 0
+x, v = Euler(x0, v0, t)[0], Euler(x0, v0, t)[1]
+
+plt.plot(t, v, 'b-.', t, x, 'r.-')
+plt.show()
