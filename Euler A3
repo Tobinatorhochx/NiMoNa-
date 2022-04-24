@@ -1,0 +1,18 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def Euler(f, x0, t):
+    x = np.zeros(len(t))
+    x[0] = x0
+    h = 0.01
+    for i in range(0, len(t)-1):
+        x[i+1] = x[i] + f(x[i], t[i])*h
+    return x
+
+t = np.arange(0, 7, h)
+x0 = 0.5
+f = lambda x, t: -x
+x = Euler(f, x0, t)
+xTr = 0.5*np.exp(-t)
+plt.plot(t, x, 'b-.', xTr, 'r.-')
+plt.show
