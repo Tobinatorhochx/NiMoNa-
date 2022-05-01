@@ -1,0 +1,20 @@
+#WIP, zu wenig Zeit :/
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Parameter:
+
+V = 1                    #Payoff
+C = 1.5                  #Injury
+x0 = 0.5                 #Initial Number of Doves
+h0 = 1 - x0              #Initial Number of Hawks
+t = np.linspace(0, 20, 20)
+
+M =np.array([[(V - C)/2, V],[0, V/2]])   #Payoff Matrix
+
+def relP(x, M):
+    v = np.zeros(len(10))
+    v[0] = np.array([x0, 1-x0])
+    v[i + 1] = np.matmul(M, x)/np.dot(x, np.matmul(M,x))
+    t = t + 1
+    return t, v
