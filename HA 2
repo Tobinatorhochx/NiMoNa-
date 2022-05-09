@@ -1,20 +1,26 @@
-#WIP, zu wenig Zeit :/
 import numpy as np
 import matplotlib.pyplot as plt
 
+#Replikator:
+def replicator(x, M):
+    return np.matmul(M, x)/np.dot(x, np.matmul(M, x))
+
 #Parameter:
+Payoff = 1
+Injury = 1.5
+InitD = 0.5
+InitH = 1 - InitD
+r = np.zeros(2)
 
-V = 1                    #Payoff
-C = 1.5                  #Injury
-x0 = 0.5                 #Initial Number of Doves
-h0 = 1 - x0              #Initial Number of Hawks
-t = np.linspace(0, 20, 20)
+#Payoff Matrix:
+M = np.array([[(Payoff - Injury)/2, Payoff], [0, Payoff/2]])
 
-M =np.array([[(V - C)/2, V],[0, V/2]])   #Payoff Matrix
+def RelP():
+    x = np.linspace(0, 30, 30)
+    r = np.array([InitD, InitH])
 
-def relP(x, M):
-    v = np.zeros(len(10))
-    v[0] = np.array([x0, 1-x0])
-    v[i + 1] = np.matmul(M, x)/np.dot(x, np.matmul(M,x))
-    t = t + 1
-    return t, v
+    for i in range(r.shape[0]):
+        r[i+1] = r[i] + r(x = r[i], M = M)
+
+    plt.plot(x, r)
+    plt.show
