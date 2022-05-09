@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 #Replikator:
 def replicator(x, M):
-    return np.matmul(M, x)/np.dot(x, np.matmul(M, x))
+    return np.dot(M, x)/np.dot(x, np.dot(M, x))
 
 #Parameter:
 Payoff = 1
@@ -20,7 +20,10 @@ def RelP():
     r = np.array([InitD, InitH])
 
     for i in range(r.shape[0]):
-        r[i+1] = r[i] + r(x = r[i], M = M)
+        r[i+1] = r[i] + replicator(x = r[i], M = M)
+    
+    return r
 
-    plt.plot(x, r)
-    plt.show
+plt.plot(RelP())
+plt.show
+    
