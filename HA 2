@@ -20,7 +20,7 @@ def RelP():
     r = np.array([InitD, InitH])
 
     for i in range(r.shape[0]):
-        r[i+1] = r[i] + replicator(x = r[i], M = M)
+        r[i+1] = r[i] * replicator(x = r[i], M = M)
     
     return r
 
