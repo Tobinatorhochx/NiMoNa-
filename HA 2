@@ -10,20 +10,19 @@ Payoff = 1
 Injury = 1.5
 InitD = 0.5
 InitH = 1 - InitD
-r = np.zeros(2)
 
 #Payoff Matrix:
 M = np.array([[(Payoff - Injury)/2, Payoff], [0, Payoff/2]])
+x = np.linspace(0, 30, 30)
 
-def RelP():
-    x = np.linspace(0, 30, 30)
-    r = np.array([InitD, InitH])
+def RelP(InitD, InitH):
+    r = np.empty((30, 2))
+    r[0] = np.array([InitD, InitH])
 
-    for i in range(r.shape[0]):
+    for i in range(r.shape[0]-1):
         r[i+1] = r[i] * replicator(x = r[i], M = M)
     
     return r
 
-plt.plot(RelP())
-plt.show
-    
+plt.plot(x, RelP(InitD, InitH))
+plt.show()
